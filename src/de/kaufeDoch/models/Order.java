@@ -30,4 +30,26 @@ public class Order {
         return customer;
     }
 
+
+    // Berechnen und geben den Gesamtbetrag der Bestellung zurück
+    /*
+    return products.stream() // Wandelt die Liste der Produkte in einen Stream um
+          .mapToDouble(Product::getPrice) // Wendet die Methode getPrice auf jedes Produkt an, um einen Stream von Preisen zu erhalten
+            .sum(); // Summiert alle Preise und gibt die Gesamtsumme zurück
+     */
+    public double getTotalAmount() {
+        return products.stream().mapToDouble(Product::getPrice).sum();
+    }
+    // Überschreibt die toString Methode, um eine String-Darstellung der Bestellung zu geben
+    @Override
+
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId + ", " +
+                "products=" + products + ", " +
+                "customer=" + customer + ", " +
+                "totalAmount=" + getTotalAmount() +
+                '}';
+    }
+
 }
