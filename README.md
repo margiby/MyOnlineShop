@@ -1,9 +1,9 @@
-# MyOnlineShop: kaufeDoch.de
+# MyOnlineShop: `kaufeDoch.de`
 ## Version 0.1
 
 ## Beschreibung
-Eine einfache Simulation eines Online-Shops.
-Willkommen bei **kaufeDoch.de**, einer einfachen Simulation eines Online-Shops, spezialisiert auf den Verkauf von refurbished Smartphones.
+Willkommen bei kaufeDoch.de, einer einfachen Simulation eines Online-Shops, spezialisiert auf den Verkauf von refurbished Smartphones.
+
 ## Features
 
 ### Must-Haves
@@ -18,68 +18,65 @@ Willkommen bei **kaufeDoch.de**, einer einfachen Simulation eines Online-Shops, 
 7. Bestellübersicht exportieren
 
 ## Umgesetzt
-* Produkte hinzufügen
-* Alle Produkte anzeigen
-* Bestellung aufgeben
-
-
+- Produkte hinzufügen
+- Alle Produkte anzeigen
+- Bestellung aufgeben
 
 ## Projektstruktur
-1. **models**: Enthält die grundlegenden Modelle des Shops, wie Produkte (z. B. Smartphones), Kunden und Bestellungen.
-2. **services**: Bietet geschäftslogische Funktionen wie Produktverwaltung, Bestellabwicklung und Kundenmanagement.
-3. **strategies**: Implementiert die verschiedenen Zahlungsstrategien mithilfe des Strategy Patterns.
-4. **Main.java**: Einstiegspunkt der Anwendung. Hier werden Menüs und Benutzerinteraktionen verwaltet.
+- **models**: Enthält die grundlegenden Modelle des Shops, wie Produkte (z. B. Smartphones), Kunden und Bestellungen.
+- **services**: Bietet geschäftslogische Funktionen wie Produktverwaltung, Bestellabwicklung und Kundenmanagement.
+- **strategies**: Implementiert die verschiedenen Zahlungsstrategien mithilfe des Strategy Patterns.
+- **Main.java**: Einstiegspunkt der Anwendung. Hier werden die Hauptlogik und Benutzerinteraktionen verwaltet.
 
+## Hauptklassen und ihre Aufgaben
+### Main
+- Verantwortlich für die Benutzerinteraktion. Führt die Hauptlogik aus und delegiert Aktionen an die entsprechenden Services.
 
-### 1. Hauptklassen und ihre Aufgaben
-####  a. Main
+### Product
+- **Eigenschaften**: id, name, price, brand, model, storage, isRefurbished.
+- **Methoden**: Getter, Setter und eine übersichtliche toString()-Methode.
 
-Verantwortlich für die Benutzerinteraktion.
-Zeigt ein Menü mit Optionen (z. B. Produkte anzeigen, hinzufügen, Bestellung aufgeben).
-Delegiert Aktionen an die entsprechenden Services.
-#### b. Product
+### Customer
+- **Eigenschaften**: id, name, email, address, orders.
+- **Methoden**: Getter, Setter und Methoden zum Hinzufügen von Bestellungen.
 
-Eigenschaften: id, name, price, quantity.
-Methoden: Getter, Setter und eine übersichtliche toString()-Methode.
-#### c. Order
+### Order
+- **Eigenschaften**: orderId, products (Liste von Produkten), customer.
+- **Methoden**: Getter, Setter und Methoden zur Berechnung des Gesamtpreises.
 
-Eigenschaften: orderId, products (Liste von Produkten), totalPrice, customerName.
-Methoden: Berechnung des Gesamtpreises, Hinzufügen von Produkten.
-#### d. ShopManager
+## Services
+### ProductService
+- Verantwortlich für die Produktverwaltung.
 
-Singleton-Klasse.
-Verwaltet die Hauptdaten wie Produkt- und Bestelllisten.
+- **Methoden**:
+    - `addProduct(Product product)`
+    - `removeProduct(Product product)`
+    - `updateProduct(int productId, String name, double price)`
+    - `searchProductsByName(String name)`
+    - `getAllProducts()`
 
+### OrderService
+- Verantwortlich für die Bestellungslogik.
 
-### 2. Services
+- **Methoden**:
+    - `addOrder(Order order)`
+    - `updateOrder(int orderId, List<Product> products)`
+    - `searchOrderById(int orderId)`
+    - `getAllOrders()`
 
-#### a. ProductService
+### CustomerService
+- Verantwortlich für die Kundenverwaltung.
 
-Verantwortlich für die Produktverwaltung.
-
-Methoden:
-* addProduct(Product product)
-* deleteProductById(int id)
-* getAllProducts()
-* findProductByName(String name)
-#### b. OrderService
-
-Verantwortlich für die Bestellungslogik.
-
-Methoden:
-* createOrder(List<Product> products, String customerName)
-* editOrder(int orderId, List<Product> updatedProducts)
-* getAllOrders()
-
-
-
-
+- **Methoden**:
+    - `addCustomer(Customer customer)`
+    - `updateCustomerAddress(int customerId, String newAddress)`
+    - `searchCustomerById(int customerId)`
+    - `getAllCustomers()`
 
 ## Design Patterns
 In diesem Projekt werden folgende Design Patterns verwendet:
-- Singleton Pattern für die Datenbankverbindung
+- Singleton Pattern für die Verwaltung einzelner Instanzen der Services
 - Factory Pattern für die Produkterstellung
-- Observer Pattern für die Benachrichtigung von Kunden über Bestellstatusänderungen
 - Strategy Pattern für verschiedene Zahlungsarten
 
 
