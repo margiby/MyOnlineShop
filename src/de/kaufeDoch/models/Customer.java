@@ -12,7 +12,7 @@ public class Customer {
     private String name;
     private String email;
     private String address;
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>(); // Initialisiert die leere Liste der Bestellungen
 
     // Konstruktor
     public Customer(int id, String name, String email, String address) {
@@ -20,7 +20,6 @@ public class Customer {
         this.name = name;
         this.email = email;
         this.address = address;
-        this.orders = new ArrayList<>(); // Initialisiert die leere Liste der Bestellungen
     }
 
     public int getId() {

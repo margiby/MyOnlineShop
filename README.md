@@ -73,6 +73,13 @@ Willkommen bei kaufeDoch.de, einer einfachen Simulation eines Online-Shops, spez
     - `searchCustomerById(int customerId)`
     - `getAllCustomers()`
 
+### Strategies 
+- Verantwortlich für die Implementierung der verschiedenen Zahlungsstrategien. 
+- **Methoden**: 
+  - `PaymentStrategy`: Ein Interface, das die Methode `pay(double amount)` definiert. 
+  - `CreditCardPayment`: Implementiert `PaymentStrategy`, um Zahlungen per Kreditkarte zu verarbeiten.
+  - `PayPalPayment`: Implementiert `PaymentStrategy`, um Zahlungen per PayPal zu verarbeiten.
+
 ## Design Patterns
 In diesem Projekt werden folgende Design Patterns verwendet:
 - Singleton Pattern für die Verwaltung einzelner Instanzen der Services
