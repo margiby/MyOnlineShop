@@ -46,7 +46,7 @@ Willkommen bei kaufeDoch.de, einer einfachen Simulation eines Online-Shops, spez
 
 ## Services
 ### ProductService
-- Verantwortlich für die Produktverwaltung.
+- Verantwortlich für die Produktverwaltung: einschließlich hinzufügen, entfernen, aktualisieren und suchen nach Produkten.
 
 - **Methoden**:
     - `addProduct(Product product)`
@@ -56,7 +56,7 @@ Willkommen bei kaufeDoch.de, einer einfachen Simulation eines Online-Shops, spez
     - `getAllProducts()`
 
 ### OrderService
-- Verantwortlich für die Bestellungslogik.
+- Verantwortlich für die Bestellungslogik: hinzufügen, aktualisieren und suchen nach Bestellungen.
 
 - **Methoden**:
     - `addOrder(Order order)`
@@ -65,7 +65,7 @@ Willkommen bei kaufeDoch.de, einer einfachen Simulation eines Online-Shops, spez
     - `getAllOrders()`
 
 ### CustomerService
-- Verantwortlich für die Kundenverwaltung.
+- Verantwortlich für die Kundenverwaltung: hinzufügen, aktualisieren und suchen nach Kunden.
 
 - **Methoden**:
     - `addCustomer(Customer customer)`

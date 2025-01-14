@@ -8,22 +8,27 @@ import java.util.List;
 // Die Customer Klasse repräsentiert einen Kunden mit Namen, E-Mail, Adresse und einer Liste von Bestellungen
  */
 public class Customer {
-    private int id;
+    private int customerId;
     private String name;
     private String email;
-    private String address;
+    private String streetAddress;
+    private String postalCode;
+    private String city;
     private List<Order> orders = new ArrayList<>(); // Initialisiert die leere Liste der Bestellungen
 
     // Konstruktor
-    public Customer(int id, String name, String email, String address) {
-        this.id = id;
+    public Customer(int customerId, String name, String email, String streetAddress, String postalCode, String city) {
+        this.customerId = customerId;
         this.name = name;
         this.email = email;
-        this.address = address;
+        this.streetAddress = streetAddress;
+        this.postalCode = postalCode;
+        this.city = city;
     }
 
-    public int getId() {
-        return id;
+    // Getter und Setter
+    public int getCustomerId() {
+        return customerId;
     }
 
     public String getName() {
@@ -33,17 +38,37 @@ public class Customer {
     public String getEmail() {
         return email;
     }
-    public String getAddress() {
-        return address;
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     public List<Order> getOrders() {
         return orders;
     }
 
-    // Setter-Methode, um die Adresse des Kunden zu aktualisieren
-    public void setAddress(String address) {
-        this.address = address;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     // Fügt eine Bestellung zur Liste der Bestellungen hinzu
@@ -54,12 +79,12 @@ public class Customer {
     // Überschreibt die toString Methode
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", orders=" + orders +
+        return "Kunde {" +
+                "Kundennummer=" + customerId +
+                ", Name='" + name + '\'' +
+                ", Email='" + email + '\'' +
+                ", Adresse='" + streetAddress + ", " + postalCode + " " + city + '\'' +
+                ", Bestellungen=" + orders +
                 '}';
     }
 }

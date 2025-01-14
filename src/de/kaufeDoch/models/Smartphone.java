@@ -1,34 +1,31 @@
+
 package de.kaufeDoch.models;
-/*
-  Die Smartphoneklasse implementiert das Product Interface und repräsentiert ein wiederaufbereitetes Smartphone
- */
 
+// Die Smartphone Klasse implementiert das Product Interface und repräsentiert ein wiederaufbereitetes Smartphone
 public class Smartphone implements Product {
-    private int id;
+    private int productId;
     private String name;
+    private String brand; // Marke des Smartphones
+    private String model; // Modell des Smartphones
     private double price;
-    private String brand;
-    private String model;
-    private int storage;
-    private boolean isRefurbished;
+    private int stock; // Lagerbestand
+    private boolean isRefurbished; // Refurbished-Flag
 
-    //Konstruktor
-
-    public Smartphone(int id, String name, double price, String brand, String model, int storage, boolean isRefurbished) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
+    // Konstruktor, um ein Smartphone mit allen Attributen zu erstellen
+    public Smartphone(int productId, String brand, String model, double price, int stock, boolean isRefurbished) {
+        this.productId = productId;
         this.brand = brand;
         this.model = model;
-        this.storage = storage;
+        this.price = price;
+        this.stock = stock;
+        this.name = brand + " " + model;
         this.isRefurbished = isRefurbished;
     }
 
-
-    // Getter
+    // Getter-Methoden
     @Override
-    public int getId() {
-        return id;
+    public int getProductId() {
+        return productId;
     }
 
     @Override
@@ -41,16 +38,9 @@ public class Smartphone implements Product {
         return price;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getStorage() {
-        return storage;
+    @Override
+    public int getStock() {
+        return stock;
     }
 
     public boolean isRefurbished() {
@@ -58,19 +48,35 @@ public class Smartphone implements Product {
     }
 
 
-    // // Überschreibt die toString Methode, um eine String-Darstellung des Smartphones zu geben
+    // Setter-Methoden
+    @Override
+    public void setStock(int stock) { // Lagerbestand ändern
+        this.stock = stock;
+    }
+
+    public void setPrice(double price) {   // Preis ändern
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+        this.price = price;
+    }
+
+    public void setRefurbished(boolean isRefurbished) {
+        this.isRefurbished = isRefurbished; // Refurbished-Status ändern
+    }
+
     @Override
     public String toString() {
         return "Smartphone{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
+                "productId=" + productId +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
-                ", storage=" + storage +
-                ", isRefurbished=" + isRefurbished +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", refurbished=" + (isRefurbished ? "Ja" : "Nein") +
                 '}';
     }
 }
+
 
 
