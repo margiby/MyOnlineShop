@@ -5,12 +5,12 @@ import de.kaufeDoch.models.Order;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // Der CustomerService verwaltet die Liste der Kunden im Shop
 
 public class CustomerService {
     private List<Customer> customers = new ArrayList<>();
-
     private OrderService orderService;
 
     public CustomerService(OrderService orderService) {
@@ -33,22 +33,30 @@ public class CustomerService {
     }
 
 
-    // Aktualisiert die Adresse eines Kunden
-    public void updateCustomer(Customer customer, String newName, String newAddress, String newPostalCode, String newCity) {
-        customer.setName(newName);
+    // Kundendaten aktualisieren
+    public void updateCustomerAddress(Customer customer, String newAddress, String newPostalCode, String newCity) {
         customer.setStreetAddress(newAddress);
         customer.setPostalCode(newPostalCode);
         customer.setCity(newCity);
     }
 
+    public void updateCustomerName(Customer customer, String newName) {
+        customer.setName(newName);
+    }
+
+    public void updateCustomerEmail(Customer customer, String newEmail) {
+        customer.setEmail(newEmail);
+
+    }
+
 
     // Sucht nach einem Kunden basierend auf der ID
-    public Customer searchCustomerById(int customerId) {
-        for (Customer customer : customers) {
-            if (customer.getCustomerId() == customerId) {
-                return customer;
-            }
-        }
-        return null; // Rückgabe null, falls kein Kunde gefunden wird
+
+    public Optional<Customer> searchCustomerById(int customerId) {
+        return customers.stream()
+                .filter(customer -> customer.getCustomerId() == customerId)
+                .findFirst();
     }
+
+
 }

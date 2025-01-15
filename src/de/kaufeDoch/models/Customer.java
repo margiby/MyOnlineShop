@@ -59,6 +59,10 @@ public class Customer {
         this.name = name;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
@@ -70,6 +74,8 @@ public class Customer {
     public void setCity(String city) {
         this.city = city;
     }
+
+
 
     // Fügt eine Bestellung zur Liste der Bestellungen hinzu
     public void addOrder(Order order) {

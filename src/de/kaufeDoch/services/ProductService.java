@@ -19,8 +19,22 @@ public class ProductService {
         products.add(product);   // Fügt ein Produkt zur Liste hinzu
     }
 
+    // Logik zum Entfernen des Produkts aus der Liste
+    public void removeProduct(Product product) {
+    }
+
     public List<Product> getAllProducts() {
         return products; // Alle Produkte anzeigen
+    }
+
+    // Methode zum Ändern des Preises eines Produkts
+    public void updateProductPrice(Product product, double newPrice) {
+        product.setPrice(newPrice);
+    }
+
+    //Lagerbestand aktualisieren
+    public void updateProductStock(Product product, int newStock) {
+        product.setStock(newStock);
     }
 
     // Produkt nach ID suchen
@@ -36,5 +50,6 @@ public class ProductService {
                 .filter(product -> product.getName().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toList());
     }
+
 }
 

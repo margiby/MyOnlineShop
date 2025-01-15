@@ -5,8 +5,14 @@ package de.kaufeDoch.models;
  */
 public interface Product {
     int getProductId();
+
     String getName();
+
     double getPrice();
+
     int getStock();
+
     void setStock(int stock);
+
+    void setPrice(double newPrice);
 }

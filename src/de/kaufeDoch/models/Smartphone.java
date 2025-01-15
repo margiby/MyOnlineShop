@@ -13,6 +13,9 @@ public class Smartphone implements Product {
 
     // Konstruktor, um ein Smartphone mit allen Attributen zu erstellen
     public Smartphone(int productId, String brand, String model, double price, int stock, boolean isRefurbished) {
+        if (brand == null || model == null) {
+            throw new IllegalArgumentException("Brand and model cannot be null");
+        }
         this.productId = productId;
         this.brand = brand;
         this.model = model;
@@ -51,6 +54,9 @@ public class Smartphone implements Product {
     // Setter-Methoden
     @Override
     public void setStock(int stock) { // Lagerbestand ändern
+        if (stock < 0) {
+            throw new IllegalArgumentException("Stock cannot be negative");
+        }
         this.stock = stock;
     }
 

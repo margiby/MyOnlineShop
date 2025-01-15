@@ -14,8 +14,7 @@ public class OrderService {
 
     public void addOrder(Order order) {
         orders.add(order); // Bestellung zur zentralen Liste hinzufügen
-        // Bestellung dem Kunden zuordnen
-        order.getCustomer().addOrder(order);
+        order.getCustomer().addOrder(order); // Bestellung dem Kunden zuordnen
     }
 
     public List<Order> getAllOrders() {
@@ -47,13 +46,19 @@ public class OrderService {
 
 
     // Sucht nach einer Bestellung basierend auf der Bestell-ID und gibt ein Optional zurück
-    public Optional<Order> searchOrderById(int orderId) {
+  /*  public Optional<Order> searchOrderById(int orderId) {
         for (Order order : orders) {
             if (order.getOrderId() == orderId) {
                 return Optional.of(order); // Wrappe die gefundene Bestellung in ein Optional
             }
         }
         return Optional.empty(); // Gibt ein leeres Optional zurück, wenn keine Bestellung gefunden wird
+    }*/
+
+    public Optional<Order> searchOrderById(int orderId) {
+        return orders.stream()
+                .filter(order -> order.getOrderId() == orderId)
+                .findFirst();
     }
 }
 
