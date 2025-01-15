@@ -54,11 +54,11 @@ public class Order {
     @Override
 
     public String toString() {
-        return "Order{" +
-                "orderId=" + orderId + ", " +
-                "products=" + products + ", " +
-                "customer=" + (customer != null ? customer.getName() : "Unknown") + ", " +
-                "totalAmount=" + getTotalAmount() +
+        return "Bestellung{" +
+                "Bestellung Id=" + orderId + ", " +
+                "Produkte=" + products + ", " +
+                "Kunde=" + (customer != null ? customer.getName() : "Unknown") + ", " +
+                "Gesamt Bestellung=" + getTotalAmount() +
                 '}';
     }
 

@@ -15,21 +15,33 @@ public class Main {
         CustomerService customerService = new CustomerService(orderService);
 
         // Produkte erstellen
-        Product smartphone1 = new Smartphone(1, "Apple", "iPhone 14", 699.0, 10, false);
-        Product smartphone2 = new Smartphone(2, "Apple", "iPhone 15 Refurbished", 599.0, 5, true);
-        Product smartphone3 = new Smartphone(3, "Samsung", "Galaxy S20 Refurbished", 799.0, 7, true);
+        Product smartphone1 = new Smartphone(1, "Apple", "iPhone 14 Pro", 699.0, 10, false);
+        Product smartphone2 = new Smartphone(2, "Apple", "iPhone 15", 599.0, 5, true);
+        Product smartphone3 = new Smartphone(3, "Samsung", "Galaxy S20", 799.0, 7, true);
 
         // Produkte hinzufügen
         productService.addProduct(smartphone1);
         productService.addProduct(smartphone2);
         productService.addProduct(smartphone3);
 
-
         // Produkte anzeigen
+        ConsolePrinter.printProductList("PRODUKTLISTE", productService.getAllProducts());
+
+
+        // Suche nach Produkten mit Teilbegriffen
+        System.out.println("\n=================================================");
+        System.out.println("           PRODUKTSUCHE: 'iPhone'");
         System.out.println("=================================================");
-        System.out.println("                   PRODUKTLISTE");
+        productService.findProductsByName("iPhone").forEach(product ->
+                System.out.println("Gefunden: " + product.getName() + " - Preis: " + product.getPrice() + "€"));
+
+        // Suche nach nicht existierendem Produkt
+        System.out.println("\n=================================================");
+        System.out.println("   PRODUKTSUCHE: 'Pixel 6' (nicht vorhanden)");
         System.out.println("=================================================");
-        productService.getAllProducts().forEach(System.out::println);
+        productService.findProductsByName("Pixel 6").forEach(product ->
+                System.out.println("Gefunden: " + product.getName() + " - Preis: " + product.getPrice() + "€"));
+
 
         // Kunden anlegen
         Customer kunde1 = new Customer(1, "Max Mustermann", "max.mustermann@gmail.com",
@@ -41,9 +53,23 @@ public class Main {
         customerService.addCustomer(kunde1);
         customerService.addCustomer(kunde2);
 
-        // Aufgeben einer Bestellung
+        // Kundeninformationen anzeigen
+        ConsolePrinter.printCustomerInfo("KUNDENINFORMATIONEN", customerService.getAllCustomers());
+
+
+        // Kundendaten aktualisieren
+        customerService.updateCustomerEmail(kunde1, "max.neuemustermann@gmail.com");
+        customerService.updateCustomerAddress(kunde1,"Neue Musterstraße 34", "07896", "Berlin");
+        customerService.updateCustomerName(kunde2, "Anna Schmidt");
+
+        // Lagerbestand vor Bestellung
+
+
+        // Bestellung 1
         Order order1 = new Order(1, Arrays.asList(smartphone1, smartphone2), kunde1);
         orderService.addOrder(order1);
+
+        // Bestellung 2
         Order order2 = new Order(2, List.of(smartphone3), kunde2);
         orderService.addOrder(order2);
 
@@ -65,20 +91,14 @@ public class Main {
 
         System.out.println("\nBestellung erfolgreich aufgegeben!");
 
+        // Bestellungen anzeigen
+        ConsolePrinter.printOrderList("ALLE BESTELLUNGEN", orderService.getAllOrders());
 
-        // Suche nach Produkten mit Teilbegriffen
+        // Ausgabe der aktualisierten Kundeninformationen
         System.out.println("\n=================================================");
-        System.out.println("           PRODUKTSUCHE: 'iPhone'");
+        System.out.println("           AKTUALISIERTE KUNDENINFORMATIONEN");
         System.out.println("=================================================");
-        productService.findProductsByName("iPhone").forEach(product ->
-                System.out.println("Gefunden: " + product.getName() + " - Preis: " + product.getPrice() + "€"));
-
-        // Suche nach nicht existierendem Produkt
-        System.out.println("\n=================================================");
-        System.out.println("   PRODUKTSUCHE: 'Pixel 6' (nicht vorhanden)");
-        System.out.println("=================================================");
-        productService.findProductsByName("Pixel 6").forEach(product ->
-                System.out.println("Gefunden: " + product.getName() + " - Preis: " + product.getPrice() + "€"));
+        customerService.getAllCustomers().forEach(System.out::println);
 
 
         // Preise aktualisieren mit ProductService
@@ -93,17 +113,19 @@ public class Main {
                 System.out.println(product.getName() + " - Neuer Preis: " + product.getPrice() + "€"));
 
         // Lagerbestand ändern mit ProductService
-        productService.updateProductStock(smartphone1, 8);
+        productService.updateProductStock(smartphone1, 9);
         productService.updateProductStock(smartphone2, 4);
         productService.updateProductStock(smartphone3, 6);
 
-        System.out.println("\n=================================================");
+        ConsolePrinter.printStockChanges(productService, "AKTUALISIERTER LAGERBESTAND");
+
+        /*System.out.println("\n=================================================");
         System.out.println("       AKTUALISIERTER LAGERBESTAND");
         System.out.println("=================================================");
         List<Product> allProducts = productService.getAllProducts();
         for (Product product : allProducts) {
             System.out.println(product.getName() + " - Lagerbestand: " + product.getStock() + " Stück");
-        }
+        }*/
 
         // Refurbished-Status aktualisieren
         productService.updateProductStatus(smartphone1, true);
@@ -120,23 +142,6 @@ public class Main {
         System.out.println(smartphone1);
         System.out.println(smartphone2);
         System.out.println(smartphone3);
-
-        // Kundendaten aktualisieren
-        customerService.updateCustomerEmail(kunde1, "max.neuemustermann@gmail.com");
-        customerService.updateCustomerAddress(kunde1,"Neue Musterstraße 34", "07896", "Berlin");
-        customerService.updateCustomerName(kunde2, "Anna Schmidt");
-
-        // Ausgabe der aktualisierten Kundeninformationen
-        System.out.println("\n=================================================");
-        System.out.println("           AKTUALISIERTE KUNDENINFORMATIONEN");
-        System.out.println("=================================================");
-        customerService.getAllCustomers().forEach(System.out::println);
-
-        // Bestellungen anzeigen
-        System.out.println("\n=================================================");
-        System.out.println("                 ALLE BESTELLUNGEN");
-        System.out.println("=================================================");
-        orderService.getAllOrders().forEach(System.out::println);
 
 
         // Entfernen eines Produkts
