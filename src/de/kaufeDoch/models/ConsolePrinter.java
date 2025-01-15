@@ -33,6 +33,15 @@ public class ConsolePrinter {
                 customer.getCity()));
     }
 
+    // Zahlung anzeigen
+    public static void printPayment(String paymentMethod, double amount) {
+        System.out.println("\n=================================================");
+        System.out.printf("           ZAHLUNG (%s)%n", paymentMethod);
+        System.out.println("=================================================");
+        System.out.printf("Betrag: %.2f€ wurde erfolgreich bezahlt.%n", amount);
+    }
+
+
     // Bestellungen ausgeben
     public static void printOrderList(String title, List<Order> orders) {
         System.out.println("\n=================================================");
@@ -45,11 +54,10 @@ public class ConsolePrinter {
                 order.getTotalAmount());
             System.out.println("Bestellte Produkte:");
             order.getProducts().forEach(product ->
-                System.out.printf("\t- %s (ID: %d, Preis: %.2f€, Lagerbestand: %d Stück)\n",
+                System.out.printf("\t- %s (ID: %d, Preis: %.2f€)\n",
                     product.getName(),
                     product.getProductId(),
-                    product.getPrice(),
-                    product.getStock()));
+                    product.getPrice()));
             System.out.println("--------------------------------------------");
         });
     }
@@ -64,4 +72,66 @@ public class ConsolePrinter {
                         product.getName(),
                         product.getStock()));
     }
+        //War ein Versuch um Fehler zu finden
+      /*  System.out.println("DEBUG: Aufruf von printStockChanges gestartet.");
+        productService.getAllProducts().forEach(product ->
+                System.out.printf("%s - Lagerbestand: %d Stück\n",
+                        product.getName(),
+                        product.getStock()));
+        System.out.println("DEBUG: Aufruf von printStockChanges beendet.");*/
+
+
+// Produktsuche anzeigen
+public static void printProductSearch(String searchTerm, List<Product> products) {
+    System.out.println("\n=================================================");
+    System.out.printf("           PRODUKTSUCHE: '%s'%n", searchTerm);
+    System.out.println("=================================================");
+    if (products.isEmpty()) {
+        System.out.println("Keine Produkte gefunden.");
+    } else {
+        products.forEach(product ->
+                System.out.printf("Gefunden: %s - Preis: %.2f€%n", product.getName(), product.getPrice()));
+    }
+}
+// Produktpreise aktualisieren
+    public static void printUpdatedPrices (String title, List < Product > products){
+        System.out.println("\n=================================================");
+        System.out.println(title);
+        System.out.println("=================================================");
+        products.forEach(product ->
+                System.out.printf("%s - Neuer Preis: %.2f€%n", product.getName(), product.getPrice()));
+    }
+
+
+// Produktentfernung anzeigen
+    public static void printProductRemoval (int productId, boolean success){
+        System.out.println("\n=================================================");
+        System.out.println("                 ENTFERNUNG EINES PRODUKTS");
+        System.out.println("=================================================");
+        if (success) {
+            System.out.printf("Produkt mit ID %d wurde erfolgreich entfernt.%n", productId);
+        } else {
+            System.out.printf("Produkt mit ID %d wurde nicht gefunden und konnte nicht entfernt werden.%n", productId);
+        }
+    }
+
+    // Refurbished-Status anzeigen
+    public static void printRefurbishedStatus(Product product) {
+        System.out.println("\n=================================================");
+        System.out.println("      REFURBISHED-STATUS AKTUALISIEREN");
+        System.out.println("=================================================");
+        System.out.printf("ID: %d - Refurbished: %s%n", product.getProductId(),
+                product instanceof Smartphone && ((Smartphone) product).isRefurbished() ? "Ja" : "Nein");
+    }
+
+    // Aktualisierte Produktinformationen anzeigen
+    public static void printUpdatedProductInfo(String title, List<Product> products) {
+        System.out.println("\n=================================================");
+        System.out.println(title);
+        System.out.println("=================================================");
+        products.forEach(System.out::println);
+    }
+
+
+
 }

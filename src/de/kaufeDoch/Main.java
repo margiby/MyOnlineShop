@@ -27,21 +27,11 @@ public class Main {
         // Produkte anzeigen
         ConsolePrinter.printProductList("PRODUKTLISTE", productService.getAllProducts());
 
-
         // Suche nach Produkten mit Teilbegriffen
-        System.out.println("\n=================================================");
-        System.out.println("           PRODUKTSUCHE: 'iPhone'");
-        System.out.println("=================================================");
-        productService.findProductsByName("iPhone").forEach(product ->
-                System.out.println("Gefunden: " + product.getName() + " - Preis: " + product.getPrice() + "€"));
+        ConsolePrinter.printProductSearch("iPhone", productService.findProductsByName("iPhone"));
 
         // Suche nach nicht existierendem Produkt
-        System.out.println("\n=================================================");
-        System.out.println("   PRODUKTSUCHE: 'Pixel 6' (nicht vorhanden)");
-        System.out.println("=================================================");
-        productService.findProductsByName("Pixel 6").forEach(product ->
-                System.out.println("Gefunden: " + product.getName() + " - Preis: " + product.getPrice() + "€"));
-
+        ConsolePrinter.printProductSearch("Pixel 6", productService.findProductsByName("Pixel 6"));
 
         // Kunden anlegen
         Customer kunde1 = new Customer(1, "Max Mustermann", "max.mustermann@gmail.com",
@@ -62,8 +52,6 @@ public class Main {
         customerService.updateCustomerAddress(kunde1,"Neue Musterstraße 34", "07896", "Berlin");
         customerService.updateCustomerName(kunde2, "Anna Schmidt");
 
-        // Lagerbestand vor Bestellung
-
 
         // Bestellung 1
         Order order1 = new Order(1, Arrays.asList(smartphone1, smartphone2), kunde1);
@@ -77,28 +65,20 @@ public class Main {
         PaymentContext paymentContext = new PaymentContext();
 
         // Setzen der Zahlungsstrategie und Zahlung per Kreditkarte
-        System.out.println("\n=================================================");
-        System.out.println("           BESTELLUNG UND ZAHLUNGEN");
-        System.out.println("=================================================");
         paymentContext.setPaymentStrategy(new CreditCardPayment());
-        System.out.println("--> Zahlung per Kreditkarte für Bestellung 1:");
-        paymentContext.pay(order1.getTotalAmount());
+        ConsolePrinter.printPayment("Kreditkarte", order1.getTotalAmount());
+        System.out.println("\nBestellung erfolgreich aufgegeben!");
 
         // Zahlung per PayPal
         paymentContext.setPaymentStrategy(new PayPalPayment());
-        System.out.println("--> Zahlung per PayPal für Bestellung 2:");
-        paymentContext.pay(order2.getTotalAmount());
-
+        ConsolePrinter.printPayment("PayPal", order2.getTotalAmount());
         System.out.println("\nBestellung erfolgreich aufgegeben!");
 
         // Bestellungen anzeigen
         ConsolePrinter.printOrderList("ALLE BESTELLUNGEN", orderService.getAllOrders());
 
         // Ausgabe der aktualisierten Kundeninformationen
-        System.out.println("\n=================================================");
-        System.out.println("           AKTUALISIERTE KUNDENINFORMATIONEN");
-        System.out.println("=================================================");
-        customerService.getAllCustomers().forEach(System.out::println);
+        ConsolePrinter.printCustomerInfo("AKTUALISIERTE KUNDENINFORMATIONEN", customerService.getAllCustomers());
 
 
         // Preise aktualisieren mit ProductService
@@ -106,11 +86,8 @@ public class Main {
         productService.updateProductPrice(smartphone2, 349.0);
         productService.updateProductPrice(smartphone3, 249.0);
 
-        System.out.println("\n=================================================");
-        System.out.println("           AKTUALISIERTE PRODUKTPREISE");
-        System.out.println("=================================================");
-        productService.getAllProducts().forEach(product ->
-                System.out.println(product.getName() + " - Neuer Preis: " + product.getPrice() + "€"));
+        // Aktualisierte Preise anzeigen
+        ConsolePrinter.printUpdatedPrices("AKTUALISIERTE PRODUKTPREISE", productService.getAllProducts());
 
         // Lagerbestand ändern mit ProductService
         productService.updateProductStock(smartphone1, 9);
@@ -119,49 +96,21 @@ public class Main {
 
         ConsolePrinter.printStockChanges(productService, "AKTUALISIERTER LAGERBESTAND");
 
-        /*System.out.println("\n=================================================");
-        System.out.println("       AKTUALISIERTER LAGERBESTAND");
-        System.out.println("=================================================");
-        List<Product> allProducts = productService.getAllProducts();
-        for (Product product : allProducts) {
-            System.out.println(product.getName() + " - Lagerbestand: " + product.getStock() + " Stück");
-        }*/
 
         // Refurbished-Status aktualisieren
         productService.updateProductStatus(smartphone1, true);
-        System.out.println("\n=================================================");
-        System.out.println("      REFURBISHED-STATUS AKTUALISIEREN");
-        System.out.println("=================================================");
-        System.out.println(smartphone1.getName() + " - Refurbished: " + ((Smartphone) smartphone1).isRefurbished());
-
+        ConsolePrinter.printRefurbishedStatus(smartphone1);
 
         // Ausgabe der aktualisierten Produktinformationen
-        System.out.println("\n=================================================");
-        System.out.println("         AKTUALISIERTE PRODUKTINFORMATIONEN");
-        System.out.println("=================================================");
-        System.out.println(smartphone1);
-        System.out.println(smartphone2);
-        System.out.println(smartphone3);
-
+        ConsolePrinter.printUpdatedProductInfo("AKTUALISIERTE PRODUKTINFORMATIONEN", productService.getAllProducts());
 
         // Entfernen eines Produkts
-
-        System.out.println("\n=================================================");
-        System.out.println("                 ENTFERNUNG EINES PRODUKTS");
-        System.out.println("=================================================");
         int productIdToRemove = 2;
-        if (productService.removeProductById(productIdToRemove)) {
-            System.out.println("\nProdukt mit ID " + productIdToRemove + " wurde erfolgreich entfernt.");
-        } else {
-            System.out.println("\nProdukt mit ID " + productIdToRemove + " wurde nicht gefunden und konnte nicht entfernt werden.");
-        }
+        boolean removalSuccess = productService.removeProductById(productIdToRemove);
+        ConsolePrinter.printProductRemoval(productIdToRemove, removalSuccess);
 
-        // Produktliste nach Entfernung anzeigen
-        System.out.println("\n=================================================");
-        System.out.println("    AKTUALISIERTE PRODUKTLISTE NACH ENTFERNUNG");
-        System.out.println("=================================================");
-        productService.getAllProducts().forEach(System.out::println);
-
+        // Aktualisierte Produktliste nach Entfernung
+        ConsolePrinter.printProductList("AKTUALISIERTE PRODUKTLISTE NACH ENTFERNUNG", productService.getAllProducts());
 
     }
 }

@@ -29,8 +29,6 @@ public class ProductService {
     }
 
 
-
-
     // Methode zum Ändern des Preises eines Produkts
     public void updateProductPrice(Product product, double newPrice) {
         product.setPrice(newPrice);
@@ -40,6 +38,8 @@ public class ProductService {
     public void updateProductStock(Product product, int newStock) {
         product.setStock(newStock);
     }
+
+    //Status Aktualisieren
 
     public void updateProductStatus(Product product, boolean isRefurbished) {
         if (product instanceof Smartphone) {
