@@ -2,8 +2,6 @@ package de.kaufeDoch.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 /*
 // Die Customer Klasse repräsentiert einen Kunden mit Namen, E-Mail, Adresse und einer Liste von Bestellungen
  */
@@ -76,7 +74,6 @@ public class Customer {
     }
 
 
-
     // Fügt eine Bestellung zur Liste der Bestellungen hinzu
     public void addOrder(Order order) {
         orders.add(order);
@@ -90,7 +87,20 @@ public class Customer {
                 ", Name='" + name + '\'' +
                 ", Email='" + email + '\'' +
                 ", Adresse='" + streetAddress + ", " + postalCode + " " + city + '\'' +
-                ", Bestellungen=" + orders +
+                ", Bestellungen=" + getOrdersSummary() +
                 '}';
+    }
+
+    // Hilfsmethode, um eine kurze Zusammenfassung der Bestellungen zu erstellen
+    private String getOrdersSummary() {
+        StringBuilder summary = new StringBuilder("[");
+        for (Order order : orders) {
+            summary.append("Bestellung ID: ").append(order.getOrderId()).append(", ");
+        }
+        if (!orders.isEmpty()) {
+            summary.setLength(summary.length() - 2); // Letztes Komma entfernen
+        }
+        summary.append("]");
+        return summary.toString();
     }
 }

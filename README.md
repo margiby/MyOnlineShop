@@ -49,28 +49,28 @@ Willkommen bei kaufeDoch.de, einer einfachen Simulation eines Online-Shops, spez
 - Verantwortlich für die Produktverwaltung: einschließlich hinzufügen, entfernen, aktualisieren und suchen nach Produkten.
 
 - **Methoden**:
-    - `addProduct(Product product)`
-    - `removeProduct(Product product)`
-    - `updateProduct(int productId, String name, double price)`
-    - `searchProductsByName(String name)`
+    - `addProduct()`
+    - `removeProduct()`
+    - `updateProduct()`
+    - `searchProductsByName()`
     - `getAllProducts()`
 
 ### OrderService
 - Verantwortlich für die Bestellungslogik: hinzufügen, aktualisieren und suchen nach Bestellungen.
 
 - **Methoden**:
-    - `addOrder(Order order)`
-    - `updateOrder(int orderId, List<Product> products)`
-    - `searchOrderById(int orderId)`
+    - `addOrder()`
+    - `updateOrder()`
+    - `searchOrderById()`
     - `getAllOrders()`
 
 ### CustomerService
 - Verantwortlich für die Kundenverwaltung: hinzufügen, aktualisieren und suchen nach Kunden.
 
 - **Methoden**:
-    - `addCustomer(Customer customer)`
-    - `updateCustomerAddress(int customerId, String newAddress)`
-    - `searchCustomerById(int customerId)`
+    - `addCustomer()`
+    - `updateCustomerAddress()`
+    - `searchCustomerById()`
     - `getAllCustomers()`
 
 ### Strategies 

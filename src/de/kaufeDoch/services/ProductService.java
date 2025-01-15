@@ -15,17 +15,21 @@ import java.util.stream.Collectors;
 public class ProductService {
     private List<Product> products = new ArrayList<>();
 
+    public List<Product> getAllProducts() {
+        return products; // Alle Produkte anzeigen
+    }
+
     public void addProduct(Product product) {
         products.add(product);   // Fügt ein Produkt zur Liste hinzu
     }
 
-    // Logik zum Entfernen des Produkts aus der Liste
-    public void removeProduct(Product product) {
+    // Methode, um ein Produkt (basierend auf ID) zu entfernen
+    public boolean removeProductById(int productId) {
+        return products.removeIf(product -> product.getProductId() == productId);
     }
 
-    public List<Product> getAllProducts() {
-        return products; // Alle Produkte anzeigen
-    }
+
+
 
     // Methode zum Ändern des Preises eines Produkts
     public void updateProductPrice(Product product, double newPrice) {
@@ -35,6 +39,12 @@ public class ProductService {
     //Lagerbestand aktualisieren
     public void updateProductStock(Product product, int newStock) {
         product.setStock(newStock);
+    }
+
+    public void updateProductStatus(Product product, boolean isRefurbished) {
+        if (product instanceof Smartphone) {
+            ((Smartphone) product).setRefurbished(isRefurbished);
+        }
     }
 
     // Produkt nach ID suchen

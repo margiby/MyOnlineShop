@@ -11,7 +11,7 @@ public class Order {
     private List<Product> products;
     private Customer customer;
 
-// Konstruktor
+    // Konstruktor
     public Order(int orderId, List<Product> products, Customer customer) {
 
         if (products == null || products.isEmpty()) {
@@ -57,9 +57,10 @@ public class Order {
         return "Order{" +
                 "orderId=" + orderId + ", " +
                 "products=" + products + ", " +
-                "customer=" + customer + ", " +
+                "customer=" + (customer != null ? customer.getName() : "Unknown") + ", " +
                 "totalAmount=" + getTotalAmount() +
                 '}';
     }
 
 }
+

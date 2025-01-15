@@ -74,12 +74,12 @@ public class Smartphone implements Product {
     @Override
     public String toString() {
         return "Smartphone{" +
-                "productId=" + productId +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                ", refurbished=" + (isRefurbished ? "Ja" : "Nein") +
+                "Produkt-ID: " + productId +
+                " | Marke: " + brand +
+                " | Modell: " + model +
+                " | Preis: " + price + "€" +
+                " | Lagerbestand: " + stock +
+                " | Refurbished: " + (isRefurbished ? "Ja" : "Nein") +
                 '}';
     }
 }
