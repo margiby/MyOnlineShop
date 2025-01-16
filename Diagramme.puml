@@ -1,0 +1,108 @@
+@startuml
+' ===================== Models =======================
+class Product {
+    + int id
+    + String name
+    + double price
+    + int stock
+    + void updateStock(int quantity)
+    + void updatePrice(double newPrice)
+}
+
+class Smartphone {
+    + String refurbishedStatus
+}
+Product <|-- Smartphone
+
+class Order {
+    + int orderId
+    + List~Product~ products
+    + Customer customer
+    + double calculateTotal()
+}
+
+class Customer {
+    + int customerId
+    + String name
+    + String email
+    + String address
+    + List~Order~ orders
+}
+
+Order --> "1" Customer 
+Order --> "1..*" Product
+Customer --> "1..*" Order
+
+' ===================== Services =======================
+class ProductService {
+    - static instance : ProductService
+    + static ProductService getInstance()
+    + void addProduct(Product product)
+    + void removeProduct(int productId)
+    + List~Product~ getAllProducts()
+}
+
+class OrderService {
+    - static instance : OrderService
+    + static OrderService getInstance()
+    + Order createOrder(Customer customer, List~Product~ products)
+    + void updateOrder(int orderId, List~Product~ newProducts)
+}
+
+class CustomerService {
+    - static instance : CustomerService
+    + static CustomerService getInstance()
+    + void addCustomer(Customer customer)
+    + Customer getCustomerById(int customerId)
+    + void updateCustomer(int customerId, String newName, String newEmail, String newAddress)
+}
+
+' Services use Singleton Pattern
+ProductService --> Product : manages
+OrderService --> Order : manages
+CustomerService --> Customer : manages
+
+' ===================== Strategy Pattern =======================
+class PaymentContext {
+    + PaymentStrategy paymentStrategy
+    + void setPaymentStrategy(PaymentStrategy strategy)
+    + void pay(double amount)
+}
+
+interface PaymentStrategy {
+    + void pay(double amount)
+}
+
+class CreditCardPayment {
+    + void pay(double amount)
+}
+
+class PayPalPayment {
+    + void pay(double amount)
+}
+
+PaymentContext --> PaymentStrategy
+PaymentStrategy <|.. CreditCardPayment
+PaymentStrategy <|.. PayPalPayment
+
+' ===================== Console Output =======================
+class ConsolePrinter {
+    + void printProducts(List~Product~ products)
+    + void printOrders(List~Order~ orders)
+    + void printCustomers(List~Customer~ customers)
+}
+
+ConsolePrinter --> Product
+ConsolePrinter --> Order
+ConsolePrinter --> Customer
+
+' ===================== Main Application =======================
+class Main {
+    + static void main(String[] args)
+}
+
+Main --> ProductService
+Main --> OrderService
+Main --> CustomerService
+Main --> PaymentContext
+@enduml

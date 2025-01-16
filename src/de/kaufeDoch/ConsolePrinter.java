@@ -1,10 +1,16 @@
-package de.kaufeDoch.models;
+package de.kaufeDoch;
 
+import de.kaufeDoch.models.Customer;
+import de.kaufeDoch.models.Order;
+import de.kaufeDoch.models.Product;
+import de.kaufeDoch.models.Smartphone;
 import de.kaufeDoch.services.ProductService;
 
 import java.util.List;
 
 public class ConsolePrinter {
+
+
 
     // Produkte ausgeben
     public static void printProductList(String title, List<Product> products) {
