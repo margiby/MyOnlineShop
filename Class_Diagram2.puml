@@ -1,0 +1,128 @@
+@startuml
+' Definition von Klassen, Interfaces und ihre Beziehungen (inkl. Main)
+
+' Interfaces
+interface Product {
+    + int getProductId()
+    + String getName()
+    + double getPrice()
+    + int getStock()
+    + void setStock(int stock)
+    + void setPrice(double newPrice)
+}
+
+interface PaymentStrategy {
+    + void pay(double totalAmount)
+}
+
+' Klassen
+class Smartphone {
+    - int productId
+    - String name
+    - String brand
+    - String model
+    - double price
+    - int stock
+    - boolean isRefurbished
+    + void setStock(int stock)
+    + void setPrice(double price)
+    + boolean isRefurbished()
+    + void setRefurbished(boolean isRefurbished)
+    + String toString()
+}
+
+class Customer {
+    - int customerId
+    - String name
+    - String email
+    - String streetAddress
+    - String postalCode
+    - String city
+    - List<Order> orders
+    + List<Order> getOrders()
+    + void setName(String name)
+    + void setEmail(String email)
+    + void setStreetAddress(String streetAddress)
+}
+
+class Order {
+    - int orderId
+    - List<Product> products
+    - Customer customer
+    + double getTotalAmount()
+    + void setProducts(List<Product> products)
+    + Customer getCustomer()
+}
+
+class ProductService {
+    - List<Product> products
+    + List<Product> getAllProducts()
+    + void addProduct(Product product)
+    + boolean removeProductById(int productId)
+    + List<Product> findProductsByName(String keyword)
+}
+
+class CustomerService {
+    - List<Customer> customers
+    - OrderService orderService
+    + List<Customer> getAllCustomers()
+    + void addCustomer(Customer customer)
+    + void updateCustomerAddress(Customer customer, String newAddress, String newPostalCode, String newCity)
+}
+
+class OrderService {
+    - List<Order> orders
+    + void addOrder(Order order)
+    + List<Order> getAllOrders()
+    + void updateOrder(int orderId, List<Product> product)
+}
+
+class PaymentContext {
+    - PaymentStrategy paymentStrategy
+    + void setPaymentStrategy(PaymentStrategy paymentStrategy)
+    + void pay(double totalAmount)
+}
+
+class CreditCardPayment {
+    + void pay(double totalAmount)
+}
+
+class PayPalPayment {
+    + void pay(double totalAmount)
+}
+
+class ConsolePrinter {
+    + static void printProductList(String title, List<Product> products)
+    + static void printCustomerInfo(String title, List<Customer> customers)
+    + static void printPayment(String paymentMethod, double amount)
+    + static void printOrderList(String title, List<Order> orders)
+}
+
+class Main {
+    ' Diese Klasse ist der Einstiegspunkt der Anwendung
+    + static void main(String[] args)
+}
+
+' Beziehungen
+Product <|-- Smartphone
+Product <.. Order : "1..* products"
+Order ..> Customer : "1 customer"
+Customer "1" --> "0..* Orders" : "owns"
+ConsolePrinter <-- Main
+ConsolePrinter <-- CustomerService
+ConsolePrinter <-- ProductService
+ConsolePrinter <-- OrderService
+OrderService ..> Product : "uses"
+CustomerService --> OrderService : "depends"
+CustomerService --> Order : "list of"
+OrderService --> Order : "manages"
+Main --> ProductService : "uses"
+Main --> CustomerService : "uses"
+Main --> OrderService : "uses"
+PaymentContext --> PaymentStrategy
+PaymentStrategy <|-- CreditCardPayment
+PaymentStrategy <|-- PayPalPayment
+Main --> PaymentContext : "manages payments"
+ProductService --> Product : "manages"
+
+@enduml

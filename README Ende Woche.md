@@ -21,7 +21,7 @@ In dieser Version wurden folgende Features und Änderungen implementiert:
   - **Zahlungsarten mit Strategy-Pattern erweitert:**
     - Unterstützung für Kreditkartenzahlungen und PayPal-Zahlungen.
   - **Kundendetails bearbeiten:** Aktualisierung der Kundendaten wie Adresse, Name und E-Mail.
-  - - **Neue Konsolenausgabe:** Die **`ConsolePrinter`-Klasse** bündelt alle Ausgabefunktionen und sorgt für eine klare Darstellung von Produkten, Bestellungen, Zahlungen und anderen Daten.
+  - **Neue Konsolenausgabe:** Die **`ConsolePrinter`-Klasse** konsolidiert die Ausgabefunktionen und sorgt durch klare Formatierungen für eine benutzerfreundliche Darstellung von Produkten, Bestellungen, Zahlungen und Kundendaten.
 
 ---
 
@@ -46,7 +46,7 @@ In dieser Version wurden folgende Features und Änderungen implementiert:
 - **`models`**: Definiert die Kernmodelle wie `Product`, `Smartphone`, `Customer` und `Order`.
 - **`services`**: Kapselt die Geschäftslogik (z. B. `ProductService`, `OrderService`, `CustomerService`).
 - **`strategies`**: Implementiert die Zahlungsstrategien mit dem Strategy-Pattern.
-- **NEU**`ConsolePrinter`**: Klasse zur strukturierten Konsolenausgabe.
+- **NEU: ConsolePrinter**: Klasse zur strukturierten Konsolenausgabe.
 - **`Main.java`**: Einstiegspunkt der Anwendung. Führt die Interaktionen und Logik aus.
 
 ---
@@ -129,12 +129,24 @@ Die folgenden interaktiven Funktionen stehen zur Verfügung:
    =================================================
    ID: 1 | Name: Max Mustermann | E-Mail: max.neuemustermann@gmail.com | Adresse: Neue Musterstraße 34, 07896 Berlin
    ```
-
+4. Produkt löschen:
+   ```plaintext
+   PRODUKT LÖSCHEN
+   =================================================
+   Produkt mit ID 2 wurde erfolgreich gelöscht!
+   ```
+5. Produkt suchen:
+   ```plaintext
+   PRODUKTSUCHE
+   =================================================
+   Name enthält: "iPhone" ➡️ Gefundene Produkte:
+   ID: 1 | Name: Apple iPhone 14 Pro | Preis: 699.00€ | Lagerbestand: 10 Stück (Refurbished: Nein)
+   ```
 ---
 
 ## Noch Ausstehend
 - Implementierung eines Export-Features (z. B. Bestellübersicht als Datei).
-- Optimierung der Benutzerführung z. B. durch ein UI oder Web-Interface.
+- Optimierung der Benutzerführung, z. B. durch ein UI oder Web-Interface, ist für eine zukünftige Version (z. B. Version 0.3) geplant.
 
 ---
 
@@ -143,6 +155,7 @@ Die folgenden interaktiven Funktionen stehen zur Verfügung:
 - **JDK 21 (Preview)**
 
 - **Bibliotheken:** Aktuell werden keine externen Bibliotheken verwendet, das Projekt basiert ausschließlich auf nativen Java-Funktionen.
+- **Tests:** Entwicklung und Tests wurden vollständig mit nativen Java-Funktionalitäten durchgeführt.
 
 ---
 
